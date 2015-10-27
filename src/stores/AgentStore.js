@@ -13,19 +13,19 @@ let _agents = [];
 
 var AgentStore = Object.assign({}, EventEmitter.prototype, {
 
-  addChangeListener: callback => {
-    this.onChange(CHANGE_EVENT, callback);
+  addChangeListener: function(callback) {
+    this.on(CHANGE_EVENT, callback);
   },
 
-  removeChangeListener: () => {
+  removeChangeListener: function() {
     this.removeListener(CHANGE_EVENT);
   },
 
-  emitChange: () => {
+  emitChange: function() {
     this.emit(CHANGE_EVENT);
   },
 
-  getAllAgents: () => {
+  getAllAgents: function() {
     return _agents;
   },
 
@@ -33,6 +33,10 @@ var AgentStore = Object.assign({}, EventEmitter.prototype, {
 
 Dispatcher.register(action => {
   switch(action.actionType) {
+    case ActionTypes.INITIALIZE:
+      _agents = action.data.agents;
+      AgentStore.emitChange();
+      break;
     case ActionTypes.GET_AGENTS:
       _agents = action.agents;
       AgentStore.emitChange();
