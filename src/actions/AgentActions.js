@@ -48,9 +48,24 @@ var AgentActions = {
       agents: allAgents
     });
   },
-  createAgent: function(newAgent) {},
-  updateAgent: function(updatedAgent) {},
-  deleteAgent: function(deletedAgent) {},
+  createAgent: function(newAgent) {
+    Dispatcher.dispatch({
+      actionType: ActionTypes.CREATE_AGENT,
+      agent: newAgent
+    });
+  },
+  updateAgent: function(updatedAgent) {
+    Dispatcher.dispatch({
+      actionType: ActionTypes.UPDATE_AGENT,
+      agent: updatedAgent
+    });
+  },
+  deleteAgent: function(deletedAgent) {
+    Dispatcher.dispatch({
+      actionType: ActionTypes.DELETE_AGENT,
+      agent: deletedAgent
+    });
+  },
 };
 
 export default AgentActions;
